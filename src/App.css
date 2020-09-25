@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+html,
+body {
+  min-height: 100%;
+}
+body {
+  position: relative;
+}
