@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SearchPage from "./pages/Search/Search";
 
+const dotenv = require("dotenv").config();
+
 function App() {
   return (
     <Router>

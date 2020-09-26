@@ -1,5 +1,4 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import React, { useState } from "react";
 import {
   MDBMask,
   MDBRow,
@@ -7,16 +6,88 @@ import {
   MDBBtn,
   MDBView,
   MDBContainer,
-  MDBFormInline,
+  MDBForm,
   MDBAnimation,
   MDBCard,
   MDBCardBody,
+  MDBCardImage,
+  MDBCardTitle,
+  MDBCardText,
+  MDBJumbotron,
 } from "mdbreact";
 import "./index.css";
+import API from "../../utils/API";
+import ResultCard from "../Search-Result-Card";
 
-class SearchPage extends React.Component {
-  render() {
-    return (
+function SearchPage() {
+  const [searchName, setSearchName] = useState({
+    name: "",
+    errormessage: "",
+  });
+  console.log(("searchName: ", searchName));
+
+  const [results, setResults] = useState({
+    results: [],
+    characters: [],
+  });
+  console.log("results: ", results);
+
+  // const [charactersObj, setCharactersObj] = useState({});
+  // console.log("characters: ", charactersObj);
+
+  function handleInputChange(event) {
+    setSearchName({
+      name: event.target.value,
+    });
+  }
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    API.getSuperhero(searchName)
+      .then((res) => {
+        console.log("res: ", res);
+        let character = res.data.results.map((character) => {
+          return {
+            img: character.image.url,
+            name: character.name,
+            alignment: character.biography.alignment,
+
+            combat: character.powerstats.combat,
+            durability: character.powerstats.durability,
+            intelligence: character.powerstats.intelligence,
+            power: character.powerstats.power,
+            speed: character.powerstats.speed,
+            strength: character.powerstats.strength,
+
+            work: character.work.occupation,
+          };
+        });
+        console.log("character: ", character);
+        setResults({
+          results: res.data.results,
+          characters: character,
+        });
+        // setCharactersObj({
+        //   ...charactersObj,
+        //   character: res.data.results.map((character) => {
+        //     return
+        //     {
+        //       img: character.image.url,
+        //       name: character.name,
+        //       alignment: character.biography.alignment,
+        //       stats: character.powerstats,
+        //       work: character.work.occupation,
+        //     };
+        //   }),
+        // });
+        // setCharacters({ character });
+        // console.log("characters.length: ", charactersObj.length);
+      })
+      .catch(console.error);
+  }
+
+  return (
+    <div>
       <div id="apppage">
         <MDBView>
           <MDBMask className="d-flex justify-content-center align-items-center gradient">
@@ -31,29 +102,48 @@ class SearchPage extends React.Component {
                       Search over 700 comicbook superheroes and villains!
                     </h1>
                     <hr className="hr-light" />
-                    <MDBFormInline waves>
-                      <div className="md-form my-0">
-                        <input
-                          className="form-control mr-sm-2 white-text"
-                          type="text"
-                          placeholder="Search"
-                          aria-label="Search"
-                        />
-                      </div>
-                    </MDBFormInline>
-                    <h6 className="mb-4">
+                    <div className="active-pink-3 active-pink-4 mb-4">
+                      <input
+                        onChange={handleInputChange}
+                        className="form-control"
+                        type="text"
+                        placeholder="Search"
+                        aria-label="Search"
+                      />
+                      <MDBBtn onClick={handleFormSubmit}>Search</MDBBtn>
+                    </div>
+
+                    {/* <MDBCol>
+                    {charactersObj.length ? (
                       <MDBCard>
-                        <MDBCardBody>
-                          <p className="black-text">
-                            this is where the card will go
-                          </p>
-                        </MDBCardBody>
+                        {charactersObj.map((character) => {
+                          return (
+                            <MDBCard style={{ width: "22rem" }}>
+                              <MDBCardImage
+                                className="img-fluid"
+                                src={character.img}
+                                waves
+                              />
+                              <MDBCardBody>
+                                <MDBCardTitle>{character.name}</MDBCardTitle>
+                                <MDBCardText>
+                                  <p>
+                                    {character.alignment}
+                                    {character.work}
+                                    {character.stats}
+                                  </p>
+                                </MDBCardText>
+                                <MDBBtn color="white">Add to Universe</MDBBtn>
+                                <MDBBtn color="white">Go to Universe</MDBBtn>
+                              </MDBCardBody>
+                            </MDBCard>
+                          );
+                        })}
                       </MDBCard>
-                    </h6>
-                    <MDBBtn color="white">Add to Universe</MDBBtn>
-                    <MDBBtn outline color="white">
-                      Go to Universe
-                    </MDBBtn>
+                    ) : (
+                      <h3>No Searches Yet</h3>
+                    )}
+                  </MDBCol> */}
                   </MDBAnimation>
                 </MDBCol>
 
@@ -70,21 +160,15 @@ class SearchPage extends React.Component {
             </MDBContainer>
           </MDBMask>
         </MDBView>
-
-        <MDBContainer>
-          <MDBRow className="py-5">
-            <MDBCol md="12" className="text-center">
-              <p>
-                Other information from different API related to character
-                search. Could split into two cols with different links; ie,
-                comics character is in and possible youtube videos
-              </p>
-            </MDBCol>
-          </MDBRow>
-        </MDBContainer>
       </div>
-    );
-  }
+
+      <MDBContainer fluid>
+        <MDBRow fluid className="text-center">
+          <ResultCard fluid characters={results.characters} />
+        </MDBRow>
+      </MDBContainer>
+    </div>
+  );
 }
 
 export default SearchPage;
