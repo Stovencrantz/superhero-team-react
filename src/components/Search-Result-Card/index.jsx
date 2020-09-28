@@ -7,12 +7,15 @@ import {
   MDBCardTitle,
   MDBCardText,
   MDBRow,
+  MDBCol,
   MDBProgress,
   MDBDropdown,
   MDBDropdownToggle,
   MDBDropdownMenu,
   MDBDropdownItem,
 } from "mdbreact";
+
+import "./index.css";
 
 const ResultCard = (props) => {
   console.log("(ResultCard) props: ", props);
@@ -52,13 +55,13 @@ const ResultCard = (props) => {
   }
 
   return (
-    <MDBRow className="justify-content-center">
+    <MDBCol className="justify-content-center align-items-center text-center container-fluid">
       {props.characters.length ? (
-        <div className="row">
+        <div className="row justify-content-center align-items-center container-fluid">
           {props.characters.map((character, i) => {
             return (
               <MDBCard
-                style={{ width: "18rem" }}
+                style={{ width: "14rem", height: "38rem" }}
                 key={i + Math.random()}
                 className="m-2"
               >
@@ -68,28 +71,36 @@ const ResultCard = (props) => {
                   key={i + Math.random()}
                 />
                 <MDBCardBody>
-                  <MDBCardTitle key={i + Math.random()}>
-                    {character.name}
+                  <MDBCardTitle
+                    className="align-text-center myColor"
+                    key={i + Math.random()}
+                  >
+                    <strong>{character.name}</strong>
                   </MDBCardTitle>
+                  <hr></hr>
 
                   <MDBCardText>
-                    <p>
+                    <p className="marginBtm">
                       Tier Ranking:{" "}
                       <strong>
-                        {tierList(
-                          parseInt(character.combat) +
-                            parseInt(character.durability) +
-                            parseInt(character.intelligence) +
-                            parseInt(character.power) +
-                            parseInt(character.speed) +
-                            parseInt(character.strength)
-                        )}
+                        <span className="myColor">
+                          {tierList(
+                            parseInt(character.combat) +
+                              parseInt(character.durability) +
+                              parseInt(character.intelligence) +
+                              parseInt(character.power) +
+                              parseInt(character.speed) +
+                              parseInt(character.strength)
+                          )}
+                        </span>
                       </strong>
                     </p>
-                    <p key={i + Math.random()}>
+                    <p key={i + Math.random()} className="marginBtm">
                       Alignment: {character.alignment}
                     </p>
-                    <p key={i + Math.random()}>Occupaton: {character.work}</p>
+                    <p key={i + Math.random()} className="marginBtm">
+                      Occupaton: {character.work}
+                    </p>
                     <p key={i + Math.random()}>
                       <strong>
                         Total Power:{" "}
@@ -101,87 +112,91 @@ const ResultCard = (props) => {
                           parseInt(character.strength)}
                       </strong>{" "}
                     </p>
-                    <MDBDropdown>
-                      <MDBDropdownToggle caret color="secondary">
-                        Power Stats
-                      </MDBDropdownToggle>
-                      <MDBDropdownMenu color="secondary" basic>
-                        <MDBDropdownItem>
-                          <p key={i + Math.random()}>
-                            Combat: {character.combat}
-                            <MDBProgress
-                              className="my-2"
-                              material
-                              value={character.combat}
-                              color={statBarColor(parseInt(character.combat))}
-                            />
-                          </p>
-                        </MDBDropdownItem>
-                        <MDBDropdownItem>
-                          <p key={i + Math.random()}>
-                            Durability: {character.durability}
-                            <MDBProgress
-                              className="my-2"
-                              material
-                              value={character.durability}
-                              color={statBarColor(
-                                parseInt(character.durability)
-                              )}
-                            />
-                          </p>
-                        </MDBDropdownItem>
-                        <MDBDropdownItem>
-                          <p key={i + Math.random()}>
-                            Intelligence: {character.intelligence}
-                            <MDBProgress
-                              className="my-2"
-                              material
-                              value={character.intelligence}
-                              color={statBarColor(
-                                parseInt(character.intelligence)
-                              )}
-                            />
-                          </p>
-                        </MDBDropdownItem>
-                        <MDBDropdownItem>
-                          <p key={i + Math.random()}>
-                            Power: {character.power}
-                            <MDBProgress
-                              className="my-2"
-                              material
-                              value={character.power}
-                              color={statBarColor(parseInt(character.power))}
-                            />
-                          </p>
-                        </MDBDropdownItem>
-                        <MDBDropdownItem>
-                          <p key={i + Math.random()}>
-                            Speed: {character.speed}
-                            <MDBProgress
-                              className="my-2"
-                              material
-                              value={character.speed}
-                              color={statBarColor(parseInt(character.speed))}
-                            />
-                          </p>
-                        </MDBDropdownItem>
-                        <MDBDropdownItem>
-                          <p key={i + Math.random()}>
-                            Strength: {character.strength}
-                            <MDBProgress
-                              className="my-2"
-                              material
-                              value={character.strength}
-                              color={statBarColor(parseInt(character.strength))}
-                            />
-                          </p>
-                        </MDBDropdownItem>
-                      </MDBDropdownMenu>
-                    </MDBDropdown>
                   </MDBCardText>
-
-                  <MDBBtn color="white">Add to Universe</MDBBtn>
-                  <MDBBtn color="white">Go to Universe</MDBBtn>
+                  <hr></hr>
+                  <MDBDropdown className="text-center" size="sm">
+                    <MDBDropdownToggle color="secondary" toggle={true}>
+                      Power Stats
+                    </MDBDropdownToggle>
+                    <MDBDropdownMenu color="secondary" basic>
+                      <MDBDropdownItem>
+                        <p key={i + Math.random()}>
+                          Combat: {character.combat}
+                          <MDBProgress
+                            className="my-2"
+                            material
+                            value={character.combat}
+                            color={statBarColor(parseInt(character.combat))}
+                          />
+                        </p>
+                      </MDBDropdownItem>
+                      <MDBDropdownItem>
+                        <p key={i + Math.random()}>
+                          Durability: {character.durability}
+                          <MDBProgress
+                            className="my-2"
+                            material
+                            value={character.durability}
+                            color={statBarColor(parseInt(character.durability))}
+                          />
+                        </p>
+                      </MDBDropdownItem>
+                      <MDBDropdownItem>
+                        <p key={i + Math.random()}>
+                          Intelligence: {character.intelligence}
+                          <MDBProgress
+                            className="my-2"
+                            material
+                            value={character.intelligence}
+                            color={statBarColor(
+                              parseInt(character.intelligence)
+                            )}
+                          />
+                        </p>
+                      </MDBDropdownItem>
+                      <MDBDropdownItem>
+                        <p key={i + Math.random()}>
+                          Power: {character.power}
+                          <MDBProgress
+                            className="my-2"
+                            material
+                            value={character.power}
+                            color={statBarColor(parseInt(character.power))}
+                          />
+                        </p>
+                      </MDBDropdownItem>
+                      <MDBDropdownItem>
+                        <p key={i + Math.random()}>
+                          Speed: {character.speed}
+                          <MDBProgress
+                            className="my-2"
+                            material
+                            value={character.speed}
+                            color={statBarColor(parseInt(character.speed))}
+                          />
+                        </p>
+                      </MDBDropdownItem>
+                      <MDBDropdownItem>
+                        <p key={i + Math.random()}>
+                          Strength: {character.strength}
+                          <MDBProgress
+                            className="my-2"
+                            material
+                            value={character.strength}
+                            color={statBarColor(parseInt(character.strength))}
+                          />
+                        </p>
+                      </MDBDropdownItem>
+                    </MDBDropdownMenu>
+                  </MDBDropdown>
+                  <div className="row">
+                    <MDBBtn className="ml-auto" color="white" size="sm">
+                      Add To
+                    </MDBBtn>
+                    <MDBBtn className="mr-auto" color="white" size="sm">
+                      Universe
+                    </MDBBtn>
+                  </div>
                 </MDBCardBody>
               </MDBCard>
             );
@@ -190,7 +205,7 @@ const ResultCard = (props) => {
       ) : (
         <h3>No Searches Yet</h3>
       )}
-    </MDBRow>
+    </MDBCol>
   );
 };
 
