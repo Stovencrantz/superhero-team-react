@@ -43,6 +43,10 @@
   margin-top: 10rem;
 }
 
+.flex {
+  display: flex;
+}
+
 @media only screen and (max-width: 400px) {
   #apppage .animated img {
     max-height: 50vh;

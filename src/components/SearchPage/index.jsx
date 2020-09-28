@@ -111,7 +111,9 @@ function SearchPage() {
                         placeholder="Search"
                         aria-label="Search"
                       />
-                      <MDBBtn onClick={handleFormSubmit}>Search</MDBBtn>
+                      <MDBBtn onClick={handleFormSubmit} color="secondary">
+                        Search
+                      </MDBBtn>
                     </div>
 
                     {/* <MDBCol>
@@ -163,7 +165,10 @@ function SearchPage() {
         </MDBView>
       </div>
 
-      <MDBContainer fluid>
+      <MDBContainer
+        fluid
+        className="justify-content-center align-items-center flex"
+      >
         <ResultCard characters={results.characters} />
       </MDBContainer>
     </div>
