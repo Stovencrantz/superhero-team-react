@@ -36,6 +36,7 @@ function SearchPage() {
   // console.log("characters: ", charactersObj);
 
   function handleInputChange(event) {
+    event.preventDefault();
     setSearchName({
       name: event.target.value,
     });
@@ -163,9 +164,7 @@ function SearchPage() {
       </div>
 
       <MDBContainer fluid>
-        <MDBRow fluid className="text-center">
-          <ResultCard fluid characters={results.characters} />
-        </MDBRow>
+        <ResultCard characters={results.characters} />
       </MDBContainer>
     </div>
   );
