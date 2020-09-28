@@ -4,7 +4,7 @@ import {
   MDBNavbarBrand,
   MDBNavbarNav,
   MDBNavItem,
-  MDBNavLink,
+  MDBLink,
   MDBNavbarToggler,
   MDBContainer,
   MDBCollapse,
@@ -49,15 +49,15 @@ class Navbar extends Component {
             <MDBCollapse isOpen={this.state.collapsed} navbar>
               <MDBNavbarNav left>
                 <MDBNavItem active>
-                  <MDBNavLink to="#!">Search</MDBNavLink>
+                  <MDBLink to="/">Search</MDBLink>
                 </MDBNavItem>
                 <MDBNavItem>
-                  <MDBNavLink to="#!">Universe</MDBNavLink>
+                  <MDBLink to="/fight">Universe</MDBLink>
                 </MDBNavItem>
               </MDBNavbarNav>
               <MDBNavbarNav right>
                 <MDBNavItem>
-                  <MDBNavLink to="#!">Log Out</MDBNavLink>
+                  <MDBLink to="/login">Log Out</MDBLink>
                 </MDBNavItem>
               </MDBNavbarNav>
             </MDBCollapse>

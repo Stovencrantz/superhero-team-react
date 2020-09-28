@@ -47,20 +47,20 @@ function SearchPage() {
     API.getSuperhero(searchName)
       .then((res) => {
         console.log("res: ", res);
-        let character = res.data.results.map((character) => {
+        let character = res.data.results.map((individual) => {
           return {
-            img: character.image.url,
-            name: character.name,
-            alignment: character.biography.alignment,
+            img: individual.image.url,
+            name: individual.name,
+            alignment: individual.biography.alignment,
 
-            combat: character.powerstats.combat,
-            durability: character.powerstats.durability,
-            intelligence: character.powerstats.intelligence,
-            power: character.powerstats.power,
-            speed: character.powerstats.speed,
-            strength: character.powerstats.strength,
+            combat: individual.powerstats.combat,
+            durability: individual.powerstats.durability,
+            intelligence: individual.powerstats.intelligence,
+            power: individual.powerstats.power,
+            speed: individual.powerstats.speed,
+            strength: individual.powerstats.strength,
 
-            work: character.work.occupation,
+            work: individual.work.occupation,
           };
         });
         console.log("character: ", character);
