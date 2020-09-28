@@ -57,7 +57,7 @@ class Navbar extends Component {
               </MDBNavbarNav>
               <MDBNavbarNav right>
                 <MDBNavItem>
-                  <MDBNavLink to="#!">About Us</MDBNavLink>
+                  <MDBNavLink to="#!">Log Out</MDBNavLink>
                 </MDBNavItem>
               </MDBNavbarNav>
             </MDBCollapse>
